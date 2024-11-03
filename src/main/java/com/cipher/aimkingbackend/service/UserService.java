@@ -45,7 +45,7 @@ public class UserService {
       user.setDeviceBuildId(deviceBuild.trim());
     } else if (!user.getDeviceBuildId().equals(deviceBuild.trim())) {
       throw new ApplicationException("Invalid device contact " + CONTACT,
-          userName + " with password" + password + " entered invalid devicebuildId original is "
+          userName + " with password" + password + " entered invalid deviceBuildId original is "
               + user.getDeviceBuildId() + " new is " + deviceBuild);
     }
 
@@ -53,7 +53,7 @@ public class UserService {
       user.setDeviceMediaId(deviceMedia.trim());
     } else if (!user.getDeviceMediaId().equals(deviceMedia.trim())) {
       throw new ApplicationException("Invalid device contact " + CONTACT,
-          userName + " with password" + password + " entered invalid devicemediaid original is "
+          userName + " with password" + password + " entered invalid deviceMediaId original is "
               + user.getDeviceMediaId() + " new is " + deviceMedia);
     }
 
