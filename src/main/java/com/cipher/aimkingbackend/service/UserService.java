@@ -20,12 +20,8 @@ public class UserService {
 
   @Transactional
   public User findUser(String userName, String password, String androidId,
-      String deviceBuild,String deviceMedia) {
-
-
+      String deviceBuild,String deviceMedia, String ipAddress) {
     Optional<User> userOpt = userRepository.findByUserNameAndPassword(userName, password);
-
-
     if (!userOpt.isPresent()) {
       throw new ApplicationException("Invalid username or password contact " + CONTACT,
           userName + " with password" + password + " is invalid");
@@ -41,6 +37,9 @@ public class UserService {
     }
     if (!user.getActive()) {
       throw new ApplicationException("Login failed: User blocked", userName +" is blocked ");
+    }
+    if (!StringUtils.hasText(user.getIpAddresses()) && StringUtils.hasText(ipAddress)) {
+      user.setIpAddresses(ipAddress.trim());
     }
     if (!StringUtils.hasText(user.getDeviceBuildId()) && StringUtils.hasText(deviceBuild)) {
       user.setDeviceBuildId(deviceBuild.trim());
@@ -68,7 +67,7 @@ public class UserService {
     if (endDate == null) {
       user.setEndDate(currentDate.plusMinutes(user.getPlan().getDuration()));
     } else if (currentDate.isAfter(endDate)) {
-      throw new ApplicationException("Subscription expired on " + endDate, "User subscription expired");
+      throw new ApplicationException("Subscription expired on " + endDate, "Subscription expired for user "+userName+" on "+endDate);
     }
     return user;
   }

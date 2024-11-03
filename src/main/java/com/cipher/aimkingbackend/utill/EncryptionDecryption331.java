@@ -106,76 +106,7 @@ public class EncryptionDecryption331 {
     }
   }
 
-  public static JSONObject firstRequestEightBallPool10(String request) {
 
-    try {
-      /**
-       *  "a" = "userName"
-       *  "b" = "password"
-       *  "c" = "androidId"
-       *  "e" or "HBD" = "storage information"
-       *  "f" or "PDD" = "Device build combination"
-       *  "g" = "Device MediaDrm uniqueId"
-       *  "h" or "SD" = "Unknown"
-       */
-
-
-      JSONObject jsonObject = new JSONObject(request);
-
-      HashMap<String, String> hashMap = new HashMap<>();
-
-
-      Iterator<String> keys = jsonObject.keys();
-
-      while (keys.hasNext()) {
-
-        String key = keys.next();
-        String value = jsonObject.getString(key);
-        if (key.equals("a") || key.equals("b") || key.equals("c")) {
-          hashMap.put(key, oO0Oo0o0(value));
-        } else if (key.equals("e") || key.equals("f") || key.equals("g") || key.equals("h")) {
-          hashMap.put(key, oO0Oo0o0(value));
-        } else {
-          hashMap.put(key, value);
-        }
-
-      }
-      // System.out.println(hashMap);
-      return new JSONObject(hashMap);
-
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      return new JSONObject();
-    }
-  }
-
-  public static JSONObject secondRequest(String request) {
-
-    try {
-
-      JSONObject jsonObject = new JSONObject(request);
-
-      HashMap<String, String> hashMap = new HashMap<>();
-
-
-      Iterator<String> keys = jsonObject.keys();
-
-      while (keys.hasNext()) {
-
-        String key = keys.next();
-        String value = jsonObject.getString(key);
-        hashMap.put(key, oO0Oo0o0new(value));
-      }
-      // System.out.println(hashMap);
-      return new JSONObject(hashMap);
-
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      return new JSONObject();
-    }
-  }
 
 
 
@@ -251,90 +182,7 @@ public class EncryptionDecryption331 {
 
 
 
-  private static void firstCall() {
-    try {
-      JSONObject jsonObject = new JSONObject(text);
-      HashMap<String, String> hashMap = new HashMap<>();
-      jsonObject = jsonObject.getJSONObject("result");
 
-      Iterator<String> keys = jsonObject.keys();
-      while (keys.hasNext()) {
-        String key = keys.next();
-        String value = jsonObject.getString(key);
-        hashMap.put(key, value);
-      }
-
-      JSONObject jsonObject1 = new JSONObject(OO00o0("180116365646441", hashMap));
-      //  JSONObject jsonObject1 = new JSONObject(OO00o0("5ce77e75a22006f1",hashMap));
-      System.out.println("JSON Output: " + jsonObject1.toString());
-      hashMap = new HashMap<>();
-      keys = jsonObject1.keys();
-      while (keys.hasNext()) {
-        String key = keys.next();
-        String value = jsonObject1.getString(key);
-        hashMap.put(key, value);
-      }
-
-      hashMap = encrypt(hashMap, "180116365646441");
-
-      jsonObject1 = new JSONObject(OO00o0("180116365646441", hashMap));
-      JSONObject finalJson = new JSONObject(hashMap);
-      //  finalJson.put("result", new JSONObject(hashMap));
-
-      System.out.println("JSON Output: " + finalJson.toString());
-      System.out.println("JSON Output: " + jsonObject);
-      hashMap = new HashMap<>();
-      keys = finalJson.keys();
-      while (keys.hasNext()) {
-        String key = keys.next();
-        String value = finalJson.getString(key);
-        hashMap.put(key, value);
-      }
-
-      jsonObject1 = new JSONObject(OO00o0("180116365646441", hashMap));
-      System.out.println("JSON Output: " + jsonObject1.toString());
-
-
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("=========================");
-
-  }
-
-  public static HashMap encrypt(Map<String, String> hashMap, String androidId) {
-
-    return OO00o0(androidId, hashMap);
-
-  }
-
-  private static void secondCall() {
-    System.out.println("========Second call======");
-    try {
-
-      JSONObject jsonObject = new JSONObject(text2);
-
-      HashMap<String, String> hashMap = new HashMap<>();
-      jsonObject = jsonObject.getJSONObject("result");
-
-      Iterator<String> keys = jsonObject.keys();
-
-      while (keys.hasNext()) {
-
-        String key = keys.next();
-        String value = jsonObject.getString(key);
-        hashMap.put(oO0Oo0o0new(key), oO0Oo0o0new(value));
-      }
-      // System.out.println(hashMap);
-      JSONObject jsonObject1 = new JSONObject(hashMap);
-      System.out.println(jsonObject1);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
 
   public static HashMap OO00o0(String str, Map<String, String> hashMap) {
@@ -452,9 +300,5 @@ public class EncryptionDecryption331 {
     return sb.toString();
   }
 
-  public static String generateHex(int number) {
-    // Convert the number to hexadecimal and pad with leading zeros to ensure 4 characters
-    return String.format("%04X", number);
-  }
 
 }
