@@ -65,7 +65,7 @@ public class UserService {
 
     if (!StringUtils.hasText(user.getDeviceMediaId()) && StringUtils.hasText(deviceMedia)) {
       user.setDeviceMediaId(deviceMedia.trim());
-    } else if (!user.getDeviceMediaId().equals(deviceMedia.trim())) {
+    } else if (StringUtils.hasText(user.getDeviceMediaId()) && (!StringUtils.hasText(deviceMedia) || !user.getDeviceMediaId().equals(deviceMedia.trim()))) {
       throw new ApplicationException("Invalid device contact " + CONTACT,
           "[" + userName + "] with password [" + password
               + "] entered invalid deviceMediaId original is [" + user.getDeviceMediaId()

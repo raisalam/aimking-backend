@@ -33,6 +33,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<String> handleException(Exception ex) {
+    ex.printStackTrace();
     System.out.println("Global Exception is called. Exception message = " + ex.getMessage());
     String message = "Error";
     return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON)
