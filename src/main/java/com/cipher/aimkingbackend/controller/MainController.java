@@ -3,6 +3,7 @@ package com.cipher.aimkingbackend.controller;
 
 import com.cipher.aimkingbackend.entity.User;
 import com.cipher.aimkingbackend.service.AkLoader331SecretService;
+import com.cipher.aimkingbackend.service.EncryptionDecryption;
 import com.cipher.aimkingbackend.service.UserService;
 import com.cipher.aimkingbackend.utill.Utill;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +25,54 @@ public class MainController {
   private final AkLoader331SecretService akLoader331SecretService;
   private final UserService userService;
 
-  @PostMapping(value = "/functions/xxxxx7xxxxx", produces = "application/json")
+  @PostMapping(value = "/functions/xxxxx6xxxxx", produces = "application/json")
+  public ResponseEntity<String> login330(@RequestBody String body, HttpServletRequest request) {
+    System.out.println("=========First Call Start ==============");
+    // Print headers
+    Enumeration<String> headerNames = request.getHeaderNames();
+    //  System.out.println("Headers:");
+
+    JSONObject jsonObject = EncryptionDecryption.firstRequest(body);
+    String userName = jsonObject.getString("a");
+    String password = jsonObject.getString("b");
+    String androidId = jsonObject.getString("c");
+    String deviceBuild = jsonObject.getString("f");
+    String deviceMedia = jsonObject.getString("g");
+    String ipAddress = "";
+    while (headerNames.hasMoreElements()) {
+      String headerName = headerNames.nextElement();
+      if (headerName != null && headerName.equals("cf-connecting-ip")) {
+        ipAddress = request.getHeader(headerName);
+      }
+    }
+
+
+    User user = userService.findUser(userName, password, androidId, deviceBuild, deviceMedia, ipAddress);
+    System.out.println("User " + user.getUserName() + " is authenticated successfully");
+
+    System.out.println(jsonObject);
+    System.out.println("User "+user.getUserName()+" is authenticated successfully");
+    System.out.println("=========First Call end ==============");
+    Map<String, String> map;
+    if(jsonObject.getString("d").equalsIgnoreCase("3582_64bit")){
+      map = EncryptionDecryption.getHashMap();
+      map.put("expiryTime", Utill.getFormattedDate(user.getEndDate()));
+    } else {
+      map = EncryptionDecryption.getHashMapEightBallPool10();
+      map.put("expiryTime", Utill.getFormattedDateEightballpool10(user.getEndDate()));
+      map.put("isenable_autoqueue", "3");
+      map.put("message", "1");
+    }
+    JSONObject finalJson = new JSONObject();
+    finalJson.put("result",
+        new JSONObject(EncryptionDecryption.OO00o0(jsonObject.getString("c"), map)));
+    return ResponseEntity.ok(finalJson.toString());
+
+  }
+
+
+
+  //@PostMapping(value = "/functions/xxxxx7xxxxx", produces = "application/json")
   public ResponseEntity<String> login(@RequestBody String body, HttpServletRequest request) {
     System.out.println("=========Login Start==============");
     // Print headers

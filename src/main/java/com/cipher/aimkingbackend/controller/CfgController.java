@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class CfgController {
 
-  @PostMapping("/functions/queryCfg")
+ // @PostMapping("/functions/queryCfg")
   public ResponseEntity<String> getCustomResponse() {
     System.out.println("Going to return response from cfG");
 
@@ -35,7 +35,7 @@ public class CfgController {
       );
 
       // Print request body
-      System.out.println("Request Body:");
+      System.out.println("Request Body: =====");
       try (BufferedReader reader = request.getReader()) {
         StringBuilder body = new StringBuilder();
         String line;
@@ -43,6 +43,7 @@ public class CfgController {
           body.append(line).append("\n");
         }
         System.out.println(body.toString());
+        System.out.println("Request body end =======");
       } catch (IOException e) {
         System.out.println("Error reading request body: " + e.getMessage());
       }
