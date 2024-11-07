@@ -72,7 +72,7 @@ public class MainController {
 
 
 
-  //@PostMapping(value = "/functions/xxxxx7xxxxx", produces = "application/json")
+  @PostMapping(value = "/functions/xxxxx7xxxxx", produces = "application/json")
   public ResponseEntity<String> login(@RequestBody String body, HttpServletRequest request) {
     System.out.println("=========Login Start==============");
     // Print headers
